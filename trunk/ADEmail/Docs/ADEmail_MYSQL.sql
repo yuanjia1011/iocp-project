@@ -1,0 +1,54 @@
+--创建用户表
+CREATE TABLE IF NOT EXISTS sys_Users (
+	FKey  varchar(38) NOT NULL ,
+	FCode  varchar(20) NOT NULL ,
+	FName  varchar(20)  NOT NULL ,
+	FPassword  varchar(30) NOT NULL ,
+	FRegTime  datetime NOT NULL COMMENT '注册时间' ,
+	FLastLoginTime  datetime NOT NULL COMMENT '最后登陆时间' ,
+	PRIMARY KEY (FKey)
+);
+
+--客户表<可以用于客户的登陆>
+CREATE TABLE IF NOT EXISTS sys_Client (
+  FKey VARCHAR(38) NOT NULL,   
+  FCode VARCHAR(20) NOT NULL,
+  FName VARCHAR(20) NOT NULL,
+  FPassword VARCHAR(30) NOT NULL, 
+  FTel VARCHAR(50) NOT NULL,
+  PRIMARY KEY (FKey)  
+)
+
+
+--EmailSMTP帐号列表
+CREATE TABLE IF NOT EXISTS sys_EmailSMTP(
+  FKey varchar(38) NOT NULL,  
+  FSMTP_Server VARCHAR(20) NOT NULL COMMENT 'SMTP服务器',
+  FSMTP_User VARCHAR(20) NOT NULL,
+  FSMTP_Password VARCHAR(20) NOT NULL,
+  PRIMARY KEY (FKey)  
+)
+
+
+--客户的Email联系人列表<每个客户导入时创建一个列表eml_EmailAddr_FUserCode>
+CREATE TABLE IF NOT EXISTS eml_EmailAddr(
+  FKey VARCHAR(38) NOT NULL,
+  FClientKey VARCHAR(38) NOT NULL '客户主键',
+  FDate DATETIME NOT NULL COMMENT '添加时间',
+  FEmail VARCHAR(50) NOT NULL 'Email地址',
+  FName VARCHAR(20) NOT NULL COMMENT '姓名',
+  FCallName VARCHAR(50) NOT NULL COMMENT '称呼',
+  FSex VARCHAR(10) NOT NULL COMMENT '性别<先生,靓仔,小姐,女士,美女>',  
+  PRIMARY KEY (FKey)
+)
+
+--任务列表
+CREATE TABLE IF NOT EXISTS eml_Task(
+  FKey VARCHAR(38) NOT NULL,
+  FClientKey VARCHAR(38) NOT NULL '客户主键',  
+  FDate DATETIME NOT NULL COMMENT '任务添加时间', 
+  FContentFile VARCHAR(30) NOT NULL COMMENT '发送内容文件',
+  PRIMARY KEY (FKey)
+)
+
+--任务接收人

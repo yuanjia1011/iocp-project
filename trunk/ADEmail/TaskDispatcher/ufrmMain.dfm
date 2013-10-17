@@ -21,8 +21,6 @@ object frmMain: TfrmMain
     ActivePage = tsDebug
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 416
-    ExplicitHeight = 304
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ExplicitLeft = 0
@@ -51,14 +49,14 @@ object frmMain: TfrmMain
     object tsIOCPINfo: TTabSheet
       Caption = 'tsIOCPINfo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 408
       ExplicitHeight = 276
     end
     object tsDebug: TTabSheet
       Caption = 'tsDebug'
       ImageIndex = 2
-      ExplicitWidth = 408
-      ExplicitHeight = 276
       object btnAssign: TButton
         Left = 11
         Top = 16

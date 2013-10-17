@@ -11,6 +11,7 @@ object frmLogin: TfrmLogin
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -33,7 +34,7 @@ object frmLogin: TfrmLogin
     Width = 196
     Height = 21
     TabOrder = 0
-    Text = 'edtUser'
+    Text = 'ymofen'
   end
   object edtPassword: TEdit
     Left = 88

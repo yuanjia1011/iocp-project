@@ -22,7 +22,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    class function ExecuteLogin: Boolean;
   end;
 
 var
@@ -32,7 +32,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, AES;
+uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, AES, uCMDConsts;
 
 procedure TfrmLogin.actOKExecute(Sender: TObject);
 var
@@ -47,7 +47,7 @@ begin
   lvCMDObject := TCMDObject.Create;
   lvRecvCMDObject := TCMDObject.Create;
   try
-    lvCMDObject.CMDIndex := 1001;
+    lvCMDObject.CMDIndex := CMD_LOGIN;
     lvCMDObject.Config.S['user'] := edtUser.Text;
     lvCMDObject.Config.S['pass'] := edtPassword.Text;
 
@@ -68,17 +68,29 @@ begin
 
     TIdTcpClienTCMDObjectCoder.Decode(dmMain.IdTCPClient, lvRecvCMDObject, 'ADEmailCode');
 
-    ShowMessage(lvRecvCMDObject.Config.AsJSon(True, false));
+    if lvRecvCMDObject.CMDResult = -1 then
+      raise Exception.Create(lvRecvCMDObject.Config.S['__msg']);
 
-    SetLength(lvData2, lvRecvCmdObject.Stream.Size);
-    lvRecvCMDObject.Stream.Position := 0;
-    lvRecvCMDObject.Stream.Read(lvData2[1], lvRecvCMDObject.Stream.Size);
-    ShowMessage(lvData2);
-
+    Close;
+    ModalResult := mrOK;
   finally
     lvCMDObject.Free;
     lvRecvCMDObject.Free;
   end;
+end;
+
+class function TfrmLogin.ExecuteLogin: Boolean;
+var
+  lvLogin:TfrmLogin;
+begin
+  lvLogin := TfrmLogin.Create(nil);
+  try
+    result := lvLogin.ShowModal()=mrOk;
+
+  finally
+    lvLogin.Free;
+  end;
+
 end;
 
 end.

@@ -64,7 +64,7 @@ begin
   lvValidCount := inBuf.validCount;
 
   if lvValidCount < (lvJSonLength + lvStreamLength +
-     SizeOf(Integer) + SizeOf(Boolean)) then
+     SizeOf(Integer) + SizeOf(Integer) + SizeOf(Integer)) then
   begin
     //返回buf的读取位置
     inBuf.restoreReaderIndex;
@@ -78,7 +78,8 @@ begin
   Result := lvCMDObject;
 
   inBuf.readBuffer(@lvCMDObject.CMDIndex, SizeOf(Integer));
-  inBuf.readBuffer(@lvCMDObject.CMDResult, SizeOf(Boolean));
+  inBuf.readBuffer(@lvCMDObject.CMDResult, SizeOf(Integer));
+  inBuf.readBuffer(@lvCMDObject.SessionID, SizeOf(Integer));
 
   //读取json字符串
   if lvJSonLength > 0 then

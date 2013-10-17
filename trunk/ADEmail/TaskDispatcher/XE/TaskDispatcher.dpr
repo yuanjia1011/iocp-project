@@ -34,7 +34,17 @@ uses
   ufrmMain in '..\ufrmMain.pas' {frmMain},
   uFMIOCPDebugINfo in '..\..\..\Common\uFMIOCPDebugINfo.pas' {FMIOCPDebugINfo: TFrame},
   uRunTimeINfoTools in '..\..\..\Common\uRunTimeINfoTools.pas',
-  uClientSessions in '..\uClientSessions.pas';
+  uClientSessions in '..\uClientSessions.pas',
+  CDSOperatorWrapper in '..\..\..\UniDACPool\CDSOperatorWrapper.pas',
+  uCDSProvider in '..\..\..\UniDACPool\uCDSProvider.pas',
+  uDBAccessOperator in '..\..\..\UniDACPool\uDBAccessOperator.pas',
+  uICDSOperator in '..\..\..\UniDACPool\uICDSOperator.pas',
+  UntCobblerUniPool in '..\..\..\UniDACPool\UntCobblerUniPool.pas',
+  UntThreadTimer in '..\..\..\UniDACPool\UntThreadTimer.pas',
+  uUniConfigTools in '..\..\..\UniDACPool\uUniConfigTools.pas',
+  uUniOperator in '..\..\..\UniDACPool\uUniOperator.pas',
+  uUniPool in '..\..\..\UniDACPool\uUniPool.pas',
+  uCMDConsts in '..\..\Common\uCMDConsts.pas';
 
 {$R *.res}
 

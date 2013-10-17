@@ -93,7 +93,8 @@ begin
 
 
     ouBuf.AddBuffer(@lvCMDObject.CMDIndex, SizeOf(Integer));
-    ouBuf.AddBuffer(@lvCMDObject.CMDResult, SizeOf(Boolean));
+    ouBuf.AddBuffer(@lvCMDObject.CMDResult, SizeOf(Integer));
+    ouBuf.AddBuffer(@lvCMDObject.SessionID, SizeOf(Integer));
 
     //json bytes
     ouBuf.AddBuffer(PAnsiChar(sData), lvJSonLength);

@@ -140,6 +140,16 @@
         </DCCReference>
         <DCCReference Include="..\..\..\Common\uRunTimeINfoTools.pas"/>
         <DCCReference Include="..\uClientSessions.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\CDSOperatorWrapper.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uCDSProvider.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uDBAccessOperator.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uICDSOperator.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\UntCobblerUniPool.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\UntThreadTimer.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uUniConfigTools.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uUniOperator.pas"/>
+        <DCCReference Include="..\..\..\UniDACPool\uUniPool.pas"/>
+        <DCCReference Include="..\..\Common\uCMDConsts.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

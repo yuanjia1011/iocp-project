@@ -6,7 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Controls, Forms, Dialogs, ComCtrls,
   uIOCPRunner,
-  StdCtrls;
+  StdCtrls,
+
+
+  SQLServerUniProvider, MySQLUniProvider;
 
 type
   TfrmMain = class(TForm)

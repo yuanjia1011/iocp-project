@@ -4,7 +4,7 @@ interface
 
 uses
   uIOCPCentre, uBuffer, uCMDObject, Classes,
-  uZipTools, SysUtils, uIOCPProtocol, AES;
+  uZipTools, SysUtils, uIOCPProtocol, EDecryptionWrapper;
 
 type
   TIOCPCMDObjectEncoder = class(TIOCPEncoder)
@@ -66,7 +66,7 @@ begin
 
 
   sData := lvCMDObject.Config.AsJSon(True, False);
-  //sData := AES.EncryptString(sData, FEncryptKey);
+  sData := TEDecryptionWrapper.AES_EncryptStr2(sData);
 
   lvJSonLength := Length(sData);
   lvStream := TMemoryStream.Create;

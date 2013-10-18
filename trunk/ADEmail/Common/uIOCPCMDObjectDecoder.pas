@@ -3,7 +3,7 @@ unit uIOCPCMDObjectDecoder;
 interface
 
 uses
-  uIOCPCentre, uBuffer, Classes, uCMDObject, uIOCPFileLogger, SysUtils, AES;
+  uIOCPCentre, uBuffer, Classes, uCMDObject, uIOCPFileLogger, SysUtils, EDecryptionWrapper;
 
 type
   TIOCPCMDObjectDecoder = class(TIOCPDecoder)
@@ -87,7 +87,7 @@ begin
     SetLength(lvData, lvJSonLength);
     inBuf.readBuffer(@lvData[1], lvJSonLength);
 
-    //lvData := AES.DecryptString(lvData, FEncryptKey);
+    lvData := TEDecryptionWrapper.AES_DecryptStr2(lvData);
 
     lvCMDObject.Config := SO(lvData);
   end else

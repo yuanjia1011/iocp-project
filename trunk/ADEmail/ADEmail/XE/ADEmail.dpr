@@ -16,7 +16,8 @@ uses
   AES in '..\..\..\Common\AES.pas',
   ElAES in '..\..\..\Common\ElAES.pas',
   superobject in '..\..\..\Common\superobject.pas',
-  uCMDConsts in '..\..\Common\uCMDConsts.pas';
+  uCMDConsts in '..\..\Common\uCMDConsts.pas',
+  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas';
 
 {$R *.res}
 
@@ -28,6 +29,5 @@ begin
   begin
     Application.CreateForm(TfrmMain, frmMain);
   end;
-  Application.CreateForm(TfrmLogin, frmLogin);
   Application.Run;
 end.

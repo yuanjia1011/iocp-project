@@ -3,7 +3,7 @@ unit uCDSProvider;
 interface
 
 uses
-  DBClient, Provider, SysUtils, ActiveX, Uni;
+  DBClient, Provider, SysUtils, ActiveX, Uni, DB;
 
 type
   TCDSProvider = class(TObject)
@@ -23,6 +23,8 @@ type
 
     //获取一个CDS.XMLDATA数据包
     function QueryXMLData(pvCmdText: string): string;
+
+    function Query(pvCmdText: string; pvOperaMsg: string = ''): TDataSet;
 
     procedure ExecuteScript(pvCmdText:String; pvOperaMsg: string = '');
 
@@ -60,6 +62,21 @@ begin
     FQuery.SQL.Clear;
     FQuery.SQL.Add(pvCmdText);
     FQuery.ExecSQL;
+  except on e: Exception do
+    begin
+       raise;
+    end;
+  end;
+end;
+
+function TCDSProvider.Query(pvCmdText, pvOperaMsg: string): TDataSet;
+begin
+  try
+    FQuery.Close;
+    FQuery.SQL.Clear;
+    FQuery.SQL.Add(pvCmdText);
+    FQuery.Open;
+    Result := FQuery;
   except on e: Exception do
     begin
        raise;

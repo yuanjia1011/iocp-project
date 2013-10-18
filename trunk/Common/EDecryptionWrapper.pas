@@ -14,6 +14,9 @@ type
     class function AES_EncryptStr(pvSource:AnsiString; pvKey:AnsiString):AnsiString;
     class function AES_DecryptStr(pvEncryptStr:AnsiString; pvKey:AnsiString): AnsiString;
 
+    class function AES_EncryptStr2(pvSource:AnsiString):AnsiString;
+    class function AES_DecryptStr2(pvEncryptStr:AnsiString): AnsiString;
+
     class function AES_EncryptStream(pvSource:TStream; pvDest:TStream;
         pvKey:AnsiString): Boolean;
     class function AES_DecryptStream(pvSource:TStream; pvDest:TStream;
@@ -30,6 +33,9 @@ type
 function AESEncryptStr(pvSource:PAnsiChar; pvKey:PAnsiChar): PAnsiChar; stdcall;
 function AESDecryptStr(pvEncryptStr:PAnsiChar; pvKey:PAnsiChar): PAnsiChar; stdcall;
 
+function AESEncryptStr2(pvSource:PAnsiChar): PAnsiChar; stdcall;
+function AESDecryptStr2(pvEncryptStr:PAnsiChar): PAnsiChar; stdcall;
+
 function AESEncryptStream(pvSource:IStream; pvDest:IStream; pvKey:PAnsiChar): Boolean; stdcall;
 function AESDecryptStream(pvSource:IStream; pvDest:IStream; pvKey:PAnsiChar): Boolean; stdcall;
 
@@ -45,6 +51,11 @@ implementation
 
 function AESEncryptStr; external EDecryptionLib name 'AESEncryptStr';
 function AESDecryptStr; external EDecryptionLib name 'AESDecryptStr';
+
+function AESEncryptStr2; external EDecryptionLib name 'AESEncryptStr2';
+function AESDecryptStr2; external EDecryptionLib name 'AESDecryptStr2';
+
+
 function AESEncryptStream; external EDecryptionLib name 'AESEncryptStream';
 function AESDecryptStream; external EDecryptionLib name 'AESDecryptStream';
 
@@ -60,6 +71,12 @@ begin
   Result := AESDecryptStr(PAnsiChar(pvEncryptStr), PAnsiChar(pvKey));
 end;
 
+class function TEDecryptionWrapper.AES_DecryptStr2(
+  pvEncryptStr: AnsiString): AnsiString;
+begin
+  Result := AESDecryptStr2(PAnsiChar(pvEncryptStr));
+end;
+
 class function TEDecryptionWrapper.AES_DecryptStream(pvSource:TStream;
     pvDest:TStream; pvKey:AnsiString): Boolean;
 begin
@@ -71,6 +88,12 @@ class function TEDecryptionWrapper.AES_EncryptStr(pvSource,
   pvKey: AnsiString): AnsiString;
 begin
   Result := AESEncryptStr(PAnsiChar(pvSource), PAnsiChar(pvKey));
+end;
+
+class function TEDecryptionWrapper.AES_EncryptStr2(
+  pvSource: AnsiString): AnsiString;
+begin
+  Result := AESEncryptStr2(PAnsiChar(pvSource));
 end;
 
 class function TEDecryptionWrapper.AES_EncryptStream(pvSource:TStream;

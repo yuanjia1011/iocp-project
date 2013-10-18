@@ -13,8 +13,6 @@ uses
   JwaQos in '..\..\..\..\Source\WinSock2\JwaQos.pas',
   JwaWinsock2 in '..\..\..\..\Source\WinSock2\JwaWinsock2.pas',
   FileLogger in '..\..\..\..\Source\IOCP\FileLogger.pas',
-  AES in '..\..\..\Common\AES.pas',
-  ElAES in '..\..\..\Common\ElAES.pas',
   superobject in '..\..\..\Common\superobject.pas',
   uCMDConsts in '..\..\Common\uCMDConsts.pas',
   EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas';

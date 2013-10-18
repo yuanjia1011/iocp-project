@@ -28,6 +28,19 @@ object frmLogin: TfrmLogin
     Height = 13
     Caption = #23494#30721
   end
+  object btnRegister: TSpeedButton
+    Left = 8
+    Top = 8
+    Width = 51
+    Height = 22
+    Action = actRegister
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtUser: TEdit
     Left = 88
     Top = 57
@@ -45,11 +58,17 @@ object frmLogin: TfrmLogin
     Text = 'edtPassword'
   end
   object btnOK: TButton
-    Left = 96
+    Left = 120
     Top = 152
     Width = 75
     Height = 25
     Action = actOK
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
   end
   object btnCancel: TButton
@@ -61,14 +80,18 @@ object frmLogin: TfrmLogin
     TabOrder = 3
   end
   object actlstMain: TActionList
-    Left = 344
-    Top = 16
+    Left = 328
+    Top = 96
     object actOK: TAction
       Caption = #30331#38470
       OnExecute = actOKExecute
     end
     object actCancel: TAction
       Caption = #21462#28040
+    end
+    object actRegister: TAction
+      Caption = #27880#20876
+      OnExecute = actRegisterExecute
     end
   end
 end

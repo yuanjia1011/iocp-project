@@ -10,10 +10,14 @@ type
   TdmMain = class(TDataModule)
     IdTCPClient: TIdTCPClient;
   private
-    { Private declarations }
+    FCMDObject: TCMDObject;
   public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
     { Public declarations }
-    procedure DoAction(pvCMDObject:TCMDObject);
+    procedure DoAction(pvCMDObject: TCMDObject = nil);
+    property CMDObject: TCMDObject read FCMDObject;
+    procedure checkConnect();
   end;
 
 var
@@ -28,16 +32,47 @@ uses
 
 {$R *.dfm}
 
-procedure TdmMain.DoAction(pvCMDObject:TCMDObject);
+procedure TdmMain.checkConnect;
 begin
-  TIdTcpClienTCMDObjectCoder.Encode(dmMain.IdTCPClient, pvCMDObject);
+  if not IdTCPClient.Connected then
+  begin
+    IdTCPClient.Host := '127.0.0.1';
+    IdTCPClient.Port := 9903;
+    IdTCPClient.Connect;
+  end;
+end;
 
-  pvCMDObject.clear;
+constructor TdmMain.Create(AOwner: TComponent);
+begin
+  inherited;
+  FCMDObject := TCMDObject.Create();
+end;
 
-  TIdTcpClienTCMDObjectCoder.Decode(dmMain.IdTCPClient, pvCMDObject);
+destructor TdmMain.Destroy;
+begin
+  FCMDObject.Free;
+  FCMDObject := nil;
+  inherited Destroy;
+end;
 
-  if pvCMDObject.CMDResult = -1 then
-    raise Exception.Create(pvCMDObject.Config.S['__msg']);
+procedure TdmMain.DoAction(pvCMDObject: TCMDObject = nil);
+var
+  lvCMDObject:TCMDObject;
+begin
+  checkConnect;
+  lvCMDObject := pvCMDObject;
+  if pvCMDObject = nil then
+  begin
+    lvCMDObject := FCMDObject;
+  end;
+  TIdTcpClienTCMDObjectCoder.Encode(IdTCPClient, lvCMDObject);
+
+  lvCMDObject.clear;
+
+  TIdTcpClienTCMDObjectCoder.Decode(IdTCPClient, lvCMDObject);
+
+  if lvCMDObject.CMDResult = -1 then
+    raise Exception.Create(lvCMDObject.Config.S['__msg']);
 end;
 
 end.

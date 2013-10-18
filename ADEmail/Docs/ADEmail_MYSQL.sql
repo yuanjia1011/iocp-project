@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS sys_Users (
 	FPassword  varchar(30) NOT NULL ,
 	FRegTime  datetime NOT NULL COMMENT '注册时间' ,
 	FLastLoginTime  datetime NOT NULL COMMENT '最后登陆时间' ,
+	FMobile varchar(20) CHARACTER SET utf8 NULL COMMENT '手机', 
 	PRIMARY KEY (FKey)
 );
 

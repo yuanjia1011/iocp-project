@@ -29,16 +29,14 @@ type
     /// </returns>
     /// <param name="pvSocket"> (TClientSocket) </param>
     /// <param name="pvObject"> (TObject) </param>
-    class function Decode(pvSocket: TIdTcpClient; pvObject: TObject;
-       pvEncryptKey:AnsiString): Boolean;
-    
+    class function Decode(pvSocket: TIdTcpClient; pvObject: TObject): Boolean;
+
     /// <summary>
     ///   ±àÂë·¢ËÍ
     /// </summary>
     /// <param name="pvSocket"> (TClientSocket) </param>
     /// <param name="pvObject"> (TObject) </param>
-    class function Encode(pvSocket: TIdTcpClient; pvObject: TObject;
-       pvEncryptKey:AnsiString): Integer;
+    class function Encode(pvSocket: TIdTcpClient; pvObject: TObject): Integer;
 
   end;
 
@@ -48,7 +46,7 @@ uses
   FileLogger;
 
 class function TIdTcpClienTCMDObjectCoder.Decode(pvSocket: TIdTcpClient;
-    pvObject: TObject;pvEncryptKey:AnsiString): Boolean;
+    pvObject: TObject): Boolean;
 var
   lvJSonLength, lvStreamLength:Integer;
   lvData, lvTemp:AnsiString;
@@ -143,7 +141,7 @@ begin
 end;
 
 class function TIdTcpClienTCMDObjectCoder.Encode(pvSocket: TIdTcpClient;
-    pvObject: TObject;pvEncryptKey:AnsiString): Integer;
+    pvObject: TObject): Integer;
 var
   lvCMDObject:TCMDObject;
   lvJSonLength:Integer;

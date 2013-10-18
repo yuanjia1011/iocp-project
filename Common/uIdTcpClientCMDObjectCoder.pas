@@ -5,7 +5,7 @@ interface
 uses
   Classes, uCMDObject, superobject,
   Windows,
-  AES,
+  EDecryptionWrapper,
   IdGlobal,
   IdTCPClient, uZipTools, uIOCPProtocol, Math, SysUtils;
 
@@ -103,7 +103,7 @@ begin
       lvStream.Position := 0;
       lvStream.ReadBuffer(lvData[1], lvStream.Size);
 
-      //lvData := AES.DecryptString(lvData, pvEncryptKey);
+      lvData := TEDecryptionWrapper.AES_DecryptStr2(lvData);
 
       lvCMDObject.Config := SO(lvData);
       if (lvCMDObject.Config = nil) or (lvCMDObject.Config.DataType <> stObject) then
@@ -181,7 +181,7 @@ begin
   if lvCMDObject.Config <> nil then
   begin
     sData := lvCMDObject.Config.AsJSon(True, false);
-    //sData := AES.EncryptString(sData, pvEncryptKey);
+    sData := TEDecryptionWrapper.AES_EncryptStr2(sData);
   end else
   begin
     sData := '';

@@ -32,7 +32,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, AES, uCMDConsts;
+uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, uCMDConsts;
 
 procedure TfrmLogin.actOKExecute(Sender: TObject);
 var
@@ -45,39 +45,15 @@ begin
   dmMain.IdTCPClient.Connect;
 
   lvCMDObject := TCMDObject.Create;
-  lvRecvCMDObject := TCMDObject.Create;
   try
     lvCMDObject.CMDIndex := CMD_LOGIN;
     lvCMDObject.Config.S['user'] := edtUser.Text;
     lvCMDObject.Config.S['pass'] := edtPassword.Text;
-
-    lvData := 'abcdÖÐ¹ú';
-    lvCMDObject.Stream.Write(lvData[1], Length(lvData));
-
-    lvData := lvCMDObject.Config.AsJSon(True, False);
-    ShowMessage(lvData);
-
-
-
-    lvData2 := TEDecryptionWrapper.AES_EncryptStr2(lvData);
-    ShowMessage(lvData2);
-
-    lvData := TEDecryptionWrapper.AES_DecryptStr2(lvData2);
-    ShowMessage(lvData);
-
-
-    TIdTcpClienTCMDObjectCoder.Encode(dmMain.IdTCPClient, lvCMDObject, 'ADEmailCode');
-
-    TIdTcpClienTCMDObjectCoder.Decode(dmMain.IdTCPClient, lvRecvCMDObject, 'ADEmailCode');
-
-    if lvRecvCMDObject.CMDResult = -1 then
-      raise Exception.Create(lvRecvCMDObject.Config.S['__msg']);
-
+    dmMain.DoAction(lvCMDObject);
     Close;
     ModalResult := mrOK;
   finally
     lvCMDObject.Free;
-    lvRecvCMDObject.Free;
   end;
 end;
 

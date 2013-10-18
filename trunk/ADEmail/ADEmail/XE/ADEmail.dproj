@@ -121,8 +121,6 @@
         <DCCReference Include="..\..\..\..\Source\WinSock2\JwaQos.pas"/>
         <DCCReference Include="..\..\..\..\Source\WinSock2\JwaWinsock2.pas"/>
         <DCCReference Include="..\..\..\..\Source\IOCP\FileLogger.pas"/>
-        <DCCReference Include="..\..\..\Common\AES.pas"/>
-        <DCCReference Include="..\..\..\Common\ElAES.pas"/>
         <DCCReference Include="..\..\..\Common\superobject.pas"/>
         <DCCReference Include="..\..\Common\uCMDConsts.pas"/>
         <DCCReference Include="..\..\..\Common\EDecryptionWrapper.pas"/>

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.Actions,
-  Vcl.ActnList, EDecryptionWrapper;
+  Vcl.ActnList, EDecryptionWrapper, Vcl.Buttons;
 
 type
   TfrmLogin = class(TForm)
@@ -18,7 +18,10 @@ type
     actCancel: TAction;
     btnOK: TButton;
     btnCancel: TButton;
+    actRegister: TAction;
+    btnRegister: TSpeedButton;
     procedure actOKExecute(Sender: TObject);
+    procedure actRegisterExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,17 +35,14 @@ implementation
 
 {$R *.dfm}
 
-uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, uCMDConsts;
+uses udmMain, uCMDObject, uIdTcpClientCMDObjectCoder, uCMDConsts, ufrmRegister;
 
 procedure TfrmLogin.actOKExecute(Sender: TObject);
 var
   lvCMDObject, lvRecvCMDObject:TCMDObject;
   lvData, lvData2:AnsiString;
 begin
-  dmMain.IdTCPClient.Disconnect;
-  dmMain.IdTCPClient.Host := '127.0.0.1';
-  dmMain.IdTCPClient.Port := 9903;
-  dmMain.IdTCPClient.Connect;
+
 
   lvCMDObject := TCMDObject.Create;
   try
@@ -54,6 +54,22 @@ begin
     ModalResult := mrOK;
   finally
     lvCMDObject.Free;
+  end;
+end;
+
+procedure TfrmLogin.actRegisterExecute(Sender: TObject);
+var
+  lvForm:TfrmRegister;
+begin
+  lvForm := TfrmRegister.Create(Self);
+  try
+    if lvForm.ShowModal() = mrOK then
+    begin
+      edtUser.Text := lvForm.edtUser.Text;
+      edtPassword.Text := '';
+    end;
+  finally
+    lvForm.Free;
   end;
 end;
 

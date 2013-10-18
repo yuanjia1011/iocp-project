@@ -15,7 +15,8 @@ uses
   FileLogger in '..\..\..\..\Source\IOCP\FileLogger.pas',
   superobject in '..\..\..\Common\superobject.pas',
   uCMDConsts in '..\..\Common\uCMDConsts.pas',
-  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas';
+  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas',
+  ufrmRegister in '..\sys\ufrmRegister.pas' {frmRegister};
 
 {$R *.res}
 

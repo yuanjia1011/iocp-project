@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.Actions,
-  Vcl.ActnList;
+  Vcl.ActnList, EDecryptionWrapper;
 
 type
   TfrmLogin = class(TForm)
@@ -54,14 +54,16 @@ begin
     lvData := 'abcdÖÐ¹ú';
     lvCMDObject.Stream.Write(lvData[1], Length(lvData));
 
-//    lvData := lvCMDObject.Config.AsJSon(True, False);
-//    ShowMessage(lvData);
-//
-//    lvData2 := AES.EncryptString(lvData, 'ADEmailCode');
-//    ShowMessage(lvData2);
-//
-//    lvData := AES.DecryptString(lvData2, 'ADEmailCode');
-//    ShowMessage(lvData);
+    lvData := lvCMDObject.Config.AsJSon(True, False);
+    ShowMessage(lvData);
+
+
+
+    lvData2 := TEDecryptionWrapper.AES_EncryptStr2(lvData);
+    ShowMessage(lvData2);
+
+    lvData := TEDecryptionWrapper.AES_DecryptStr2(lvData2);
+    ShowMessage(lvData);
 
 
     TIdTcpClienTCMDObjectCoder.Encode(dmMain.IdTCPClient, lvCMDObject, 'ADEmailCode');

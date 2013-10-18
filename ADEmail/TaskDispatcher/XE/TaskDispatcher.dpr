@@ -27,8 +27,6 @@ uses
   uCRCTools in '..\..\..\Common\uCRCTools.pas',
   uIOCPCMDObjectDecoder in '..\..\Common\uIOCPCMDObjectDecoder.pas',
   uIOCPCMDObjectEncoder in '..\..\Common\uIOCPCMDObjectEncoder.pas',
-  AES in '..\..\..\Common\AES.pas',
-  ElAES in '..\..\..\Common\ElAES.pas',
   uIOCPRunner in '..\uIOCPRunner.pas',
   uClientContext in '..\uClientContext.pas',
   ufrmMain in '..\ufrmMain.pas' {frmMain},
@@ -44,7 +42,8 @@ uses
   uUniConfigTools in '..\..\..\UniDACPool\uUniConfigTools.pas',
   uUniOperator in '..\..\..\UniDACPool\uUniOperator.pas',
   uUniPool in '..\..\..\UniDACPool\uUniPool.pas',
-  uCMDConsts in '..\..\Common\uCMDConsts.pas';
+  uCMDConsts in '..\..\Common\uCMDConsts.pas',
+  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas';
 
 {$R *.res}
 

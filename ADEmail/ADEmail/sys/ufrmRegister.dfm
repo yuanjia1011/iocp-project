@@ -83,6 +83,7 @@ object frmRegister: TfrmRegister
     Top = 52
     Width = 180
     Height = 21
+    PasswordChar = '*'
     TabOrder = 1
   end
   object edtMobile: TEdit
@@ -113,6 +114,7 @@ object frmRegister: TfrmRegister
     Top = 80
     Width = 180
     Height = 21
+    PasswordChar = '*'
     TabOrder = 2
   end
   object edtName: TEdit

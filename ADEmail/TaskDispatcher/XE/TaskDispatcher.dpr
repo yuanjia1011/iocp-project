@@ -43,7 +43,8 @@ uses
   uUniOperator in '..\..\..\UniDACPool\uUniOperator.pas',
   uUniPool in '..\..\..\UniDACPool\uUniPool.pas',
   uCMDConsts in '..\..\Common\uCMDConsts.pas',
-  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas';
+  EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas',
+  uFileHandler in '..\FilesHandler\uFileHandler.pas';
 
 {$R *.res}
 

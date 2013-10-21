@@ -63,7 +63,7 @@ begin
   dmMain.CMDObject.CMDIndex := CMD_REGISTER;
   dmMain.CMDObject.Config.S['user'] := lvUser;
   dmMain.CMDObject.Config.S['name'] := Trim(edtName.Text);
-  dmMain.CMDObject.Config.S['pass'] := TEDecryptionWrapper.MD5_Str(LowerCase(lvUser) + lvPass);
+  dmMain.CMDObject.Config.S['pass'] := TEDecryptionWrapper.MD5_Str(LowerCase(lvUser) + '#mofen#' + lvPass);
   dmMain.CMDObject.Config.S['email'] := Trim(edtEmail.Text);
   dmMain.CMDObject.Config.S['mobile'] := Trim(edtMobile.Text);
 

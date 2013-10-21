@@ -31,6 +31,12 @@ type
     //获取一个任务
     procedure DoGetATask(const pvCMDObject:TCMDObject);
 
+    //获取一个文件数据
+    procedure GetFileDATA(const pvCMDObject:TCMDObject);
+
+    //获取一个文件信息
+    procedure GetFileINfo(const pvCMDObject:TCMDObject);
+
   public
     /// <summary>
     ///   数据处理
@@ -213,8 +219,6 @@ begin
       end;
       pvCMDObject.clear;
 
-
-
     finally
       lvDBDataOperator.Free;
     end;
@@ -272,6 +276,18 @@ begin
     //归还连接池
     TUniPool.releaseConnObject(lvPoolObj);
   end;
+end;
+
+procedure TClientContext.GetFileDATA(const pvCMDObject: TCMDObject);
+begin
+  pvCMDObject.Config.S['fileName'];
+end;
+
+procedure TClientContext.GetFileINfo(const pvCMDObject: TCMDObject);
+var
+  lvFile: string;
+begin
+  //lvFile :=;
 end;
 
 end.

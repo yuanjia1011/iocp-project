@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS sys_Users (
 	FMobile varchar(20) CHARACTER SET utf8 NULL COMMENT '手机',
     FEmail varchar(30) CHARACTER SET utf8 NULL COMMENT 'Email',	
 	PRIMARY KEY (FKey)
-);
+) DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 -- 客户表<可以用于客户的登陆>
 CREATE TABLE IF NOT EXISTS sys_Client (

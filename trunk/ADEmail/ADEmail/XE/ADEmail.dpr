@@ -19,14 +19,22 @@ uses
   ufrmRegister in '..\sys\ufrmRegister.pas' {frmRegister};
 
 {$R *.res}
-
+var
+  lvTempForm:TForm;
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+  Application.Title := 'ADEmail';
+  Application.ShowMainForm := false;
+  Application.CreateForm(TForm, lvTempForm);  //建立临时主窗体
+
   Application.CreateForm(TdmMain, dmMain);
   if TfrmLogin.ExecuteLogin then
   begin
+    lvTempForm.Free;
+    lvTempForm := nil;
     Application.CreateForm(TfrmMain, frmMain);
+    Application.ShowMainForm := true;
+    Application.Run;
   end;
-  Application.Run;
+
 end.

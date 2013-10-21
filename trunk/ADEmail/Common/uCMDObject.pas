@@ -32,6 +32,7 @@ procedure TCMDObject.clear;
 begin
   FStream.Size := 0;
   FConfig.Clear();
+  FCMDResult := 0;
 end;
 
 constructor TCMDObject.Create;

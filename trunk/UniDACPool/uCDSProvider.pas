@@ -42,6 +42,8 @@ begin
   FProvider.Options := FProvider.Options + [poIncFieldProps];
 
   FQuery := TUniQuery.Create(nil);
+
+
   FQuery.DisableControls;
   FQuery.ParamCheck := false;
   FProvider.DataSet := FQuery;

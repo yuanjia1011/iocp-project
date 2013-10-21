@@ -96,6 +96,8 @@ begin
   FFlag := False;
   FAStart := Now;
   FConnObj := TUniConnection.Create(nil);
+  FConnObj.SpecificOptions.Values['MySQL.UseUnicode'] := 'true';
+
   FConnObj.ConnectString := tmpConnStr;
   FConnObj.LoginPrompt := False;
 end;

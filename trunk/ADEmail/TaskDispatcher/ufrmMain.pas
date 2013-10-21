@@ -9,7 +9,7 @@ uses
   StdCtrls,
 
 
-  SQLServerUniProvider, MySQLUniProvider;
+  SQLServerUniProvider, MySQLUniProvider, uCMDObject, ComObj;
 
 type
   TfrmMain = class(TForm)
@@ -20,11 +20,17 @@ type
     btnStop: TButton;
     tsDebug: TTabSheet;
     btnAssign: TButton;
+    btnTesterMySQL: TButton;
+    btnFileHandler: TButton;
+    procedure btnFileHandlerClick(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
+    procedure btnTesterMySQLClick(Sender: TObject);
   private
     { Private declarations }
     FIOCPRuuner:TIOCPRunner;
+    //注册
+    procedure DoRegister;
     procedure refreshState;
   public
     { Public declarations }
@@ -39,7 +45,8 @@ implementation
 
 {$R *.dfm}
 
-uses uFMIOCPDebugINfo;
+uses uFMIOCPDebugINfo, uUniOperator, UntCobblerUniPool, Db, uUniPool,
+  uFileHandler;
 
 { TfrmMain }
 
@@ -67,6 +74,99 @@ destructor TfrmMain.Destroy;
 begin
   FIOCPRuuner.Free;
   inherited;
+end;
+
+procedure TfrmMain.btnFileHandlerClick(Sender: TObject);
+var
+  lvCount:Integer;
+  lvFileStream:TFileStream;
+  lvFileName:String;
+begin
+  TFileHandler.setBasePath('D:\');
+
+  lvFileName :='E:\abc.jpg';
+  if FileExists(lvFileName) then
+  begin
+    lvFileStream := TFileStream.Create(lvFileName, fmOpenWrite or fmCreate);
+    lvFileStream.Size := 0;
+  end else
+  begin
+    lvFileStream := TFileStream.Create(lvFileName, fmOpenWrite or fmCreate);
+  end;
+  try
+
+    while True do
+    begin
+      lvCount := TFileHandler.readFileData('abc.jpg', lvFileStream.Position, 1024, lvFileStream);
+      if lvCount <=0 then
+      begin
+        Break;
+      end;
+    end;
+  finally
+    lvFileStream.Free;
+  end;
+
+
+end;
+
+procedure TfrmMain.btnTesterMySQLClick(Sender: TObject);
+begin
+  DoRegister();
+end;
+
+procedure TfrmMain.DoRegister;
+var
+  lvDBDataOperator:TUniOperator;
+  lvPoolObj:TUniCobbler;
+  lvSQL:AnsiString;
+  lvDataSet:TDataSet;
+begin
+  //通过帐套ID获取一个连接池对象
+  lvPoolObj := TUniPool.getConnObject('main');
+  try
+    //打开连接
+    lvPoolObj.checkConnect;
+
+    //Uni数据库操作对象<可以改用对象池效率更好>
+    lvDBDataOperator := TUniOperator.Create;
+    try
+      //设置使用的连接池
+      lvDBDataOperator.Connection := lvPoolObj.ConnObj;
+
+      lvSQL := 'SELECT * FROM sys_Users WHERE 1=0';
+
+      try
+        //获取一个查询的数据
+        lvDataSet := lvDBDataOperator.CDSProvider.Query(lvSQL);
+        if lvDataSet.RecordCount = 0 then
+        begin
+          lvDataSet.Append;
+          lvDataSet.FieldByName('FKey').AsString := CreateClassID;
+          lvDataSet.FieldByName('FCode').AsString := '汉字';
+          lvDataSet.FieldByName('FPassword').AsString := '汉字';
+          lvDataSet.FieldByName('FEmail').AsString := '汉字';
+          lvDataSet.FieldByName('FName').AsString := UTF8Encode('汉字');
+          lvDataSet.FieldByName('FMobile').AsString := '汉字';
+          lvDataSet.FieldByName('FRegTime').AsDateTime := Now();
+          lvDataSet.Post;
+        end else
+        begin
+          raise Exception.Create('用户名已经存在!');
+        end;
+      except
+        raise;
+      end;
+
+
+    finally
+      lvDBDataOperator.Free;
+    end;
+  finally
+    //归还连接池
+    TUniPool.releaseConnObject(lvPoolObj);
+  end;
+
 end;
 
 procedure TfrmMain.refreshState;

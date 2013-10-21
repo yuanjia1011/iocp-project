@@ -18,7 +18,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 591
     Height = 311
-    ActivePage = TabSheet1
+    ActivePage = tsDebug
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -56,6 +56,24 @@ object frmMain: TfrmMain
         Height = 25
         Caption = #20998#37197#19968#27425#20219#21153
         TabOrder = 0
+      end
+      object btnTesterMySQL: TButton
+        Left = 11
+        Top = 72
+        Width = 105
+        Height = 25
+        Caption = 'btnTesterMySQL'
+        TabOrder = 1
+        OnClick = btnTesterMySQLClick
+      end
+      object btnFileHandler: TButton
+        Left = 11
+        Top = 128
+        Width = 105
+        Height = 25
+        Caption = 'btnFileHandler'
+        TabOrder = 2
+        OnClick = btnFileHandlerClick
       end
     end
   end

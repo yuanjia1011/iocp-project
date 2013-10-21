@@ -50,7 +50,7 @@ type
     /// </returns>
     /// <param name="pvFile"> (string) </param>
     /// <param name="pvFileINfo">
-    ///
+    ///    length:fileSize
     /// </param>
     class function getFileINfo(pvFile: string; const pvFileINfo: ISuperObject):
         Boolean;
@@ -137,8 +137,23 @@ end;
 
 class function TFileHandler.getFileINfo(pvFile: string; const pvFileINfo:
     ISuperObject): Boolean;
+var
+  lvFile:String;
+  lvFileStream:TFileStream;
 begin
-  Result := ;
+  lvFile := getBasePath + '\' + pvFile;
+  if FileExists(lvFile) then
+  begin
+    lvFileStream := TFileStream.Create(lvFile, fmOpenRead or fmShareDenyWrite);
+    try
+      pvFileINfo.I['length'] := lvFileStream.Size;
+    finally
+      lvFileStream.Free;
+    end;
+  end else
+  begin
+    pvFileINfo.I['length'] := 0;
+  end;
 end;
 
 

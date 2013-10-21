@@ -28,6 +28,32 @@ type
     /// <param name="pvStream"> (TStream) </param>
     class function readFileData(pvFile: string; pvPosition, pvCount: Int64;
         pvStream: TStream): Integer;
+
+    /// <summary>
+    ///   写入文件数据
+    /// </summary>
+    /// <returns>
+    ///   返回写入的文件长度
+    /// </returns>
+    /// <param name="pvFile"> 文件名 </param>
+    /// <param name="pvBuffer"> 写入的数据 </param>
+    /// <param name="pvPosition"> 开始写入的位置,大于现有文件尺寸或者负数则加入到最后 </param>
+    /// <param name="pvCount"> 要写入的长度 </param>
+    class function writeFileData(pvFile:string; pvBuffer:Pointer; pvPosition,
+        pvCount: Int64): Integer;
+
+
+    /// <summary>
+    ///   获取文件信息
+    /// </summary>
+    /// <returns> Boolean
+    /// </returns>
+    /// <param name="pvFile"> (string) </param>
+    /// <param name="pvFileINfo">
+    ///
+    /// </param>
+    class function getFileINfo(pvFile: string; const pvFileINfo: ISuperObject):
+        Boolean;
   end;
 
 implementation
@@ -109,6 +135,12 @@ begin
   end;
 end;
 
+class function TFileHandler.getFileINfo(pvFile: string; const pvFileINfo:
+    ISuperObject): Boolean;
+begin
+  Result := ;
+end;
+
 
 class function TFileHandler.loadConfig: ISuperObject;
 var
@@ -132,6 +164,38 @@ begin
   end else
   begin
     Result := nil;
+  end;
+end;
+
+class function TFileHandler.writeFileData(pvFile:string; pvBuffer:Pointer;
+    pvPosition, pvCount: Int64): Integer;
+var
+  lvFile:String;
+  lvFileStream:TFileStream;
+begin
+  lvFile := getBasePath + '\' + pvFile;
+  if FileExists(lvFile) then
+  begin
+    lvFileStream := TFileStream.Create(lvFile, fmOpenWrite);
+  end else
+  begin
+    lvFileStream := TFileStream.Create(lvFile, fmCreate);
+  end;
+  try
+    if pvPosition >= lvFileStream.Size then
+    begin
+      lvFileStream.Position := lvFileStream.Size;
+    end else if pvPosition < 0 then
+    begin
+      lvFileStream.Position := lvFileStream.Size;
+    end else
+    begin
+      lvFileStream.Position := pvPosition;
+    end;
+
+    Result := lvFileStream.Write(pvBuffer, pvCount);
+  finally
+    lvFileStream.Free;
   end;
 end;
 

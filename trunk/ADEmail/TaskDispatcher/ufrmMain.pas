@@ -78,33 +78,37 @@ end;
 
 procedure TfrmMain.btnFileHandlerClick(Sender: TObject);
 var
-  lvCount:Integer;
+  lvCount, lvPosition:Integer;
   lvFileStream:TFileStream;
   lvFileName:String;
+  lvBuffer: PAnsiChar;
 begin
   TFileHandler.setBasePath('D:\');
 
-  lvFileName :='E:\abc.jpg';
+  lvFileName :='D:\abc.jpg';
   if FileExists(lvFileName) then
   begin
-    lvFileStream := TFileStream.Create(lvFileName, fmOpenWrite or fmCreate);
-    lvFileStream.Size := 0;
-  end else
-  begin
-    lvFileStream := TFileStream.Create(lvFileName, fmOpenWrite or fmCreate);
-  end;
+    lvFileStream := TFileStream.Create(lvFileName, fmOpenRead);
   try
-
-    while True do
-    begin
-      lvCount := TFileHandler.readFileData('abc.jpg', lvFileStream.Position, 1024, lvFileStream);
-      if lvCount <=0 then
+    lvPosition := 0;
+    GetMem(lvBuffer, 1024);
+    try
+      while True do
       begin
-        Break;
+        lvCount := lvFileStream.Read(lvBuffer, 1024);
+        lvPosition := lvPosition + TFileHandler.writeFileData('writeabc.jpg', lvBuffer, lvPosition, lvCount);
+
+        if lvCount =0 then
+        begin
+          Break;
+        end;
       end;
+    finally
+      FreeMem(lvBuffer);
     end;
   finally
     lvFileStream.Free;
+  end;
   end;
 
 

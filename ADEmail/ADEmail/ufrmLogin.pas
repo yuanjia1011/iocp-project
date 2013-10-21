@@ -48,7 +48,7 @@ begin
   try
     lvCMDObject.CMDIndex := CMD_LOGIN;
     lvCMDObject.Config.S['user'] := edtUser.Text;
-    lvCMDObject.Config.S['pass'] := edtPassword.Text;
+    lvCMDObject.Config.S['pass'] := TEDecryptionWrapper.MD5_Str(LowerCase(edtUser.Text) + edtPassword.Text);
     dmMain.DoAction(lvCMDObject);
     Close;
     ModalResult := mrOK;

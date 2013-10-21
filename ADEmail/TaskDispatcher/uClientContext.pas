@@ -19,9 +19,16 @@ type
     procedure DoOnWriteBack; override;
 
   private
+    //登陆
     procedure DoLogin(const pvCMDObject:TCMDObject);
+
+    //注册检测
     procedure DoRegisterCheck(const pvCMDObject:TCMDObject);
+
+    //注册
     procedure DoRegister(const pvCMDObject:TCMDObject);
+
+    //获取一个任务
     procedure DoGetATask(const pvCMDObject:TCMDObject);
 
   public
@@ -43,7 +50,7 @@ type
 implementation
 
 uses
-  Math, uCMDConsts, uUniPool, UntCobblerUniPool, uUniOperator, DB;
+  Math, uCMDConsts, uUniPool, UntCobblerUniPool, uUniOperator, DB, uCRCTools;
 
 
 
@@ -126,6 +133,16 @@ begin
         if lvDataSet.RecordCount = 0 then
         begin
           raise Exception.Create('用户不存在!');
+        end else
+        begin
+          if lvDataSet.FieldByName('FPassword').AsString <> pvCMDObject.Config.S['pass'] then
+          begin
+            raise Exception.Create('密码错误!');
+          end;
+          lvDataSet.Edit;
+          lvDataSet.FieldByName('FLastLoginTime').AsDateTime := Now();
+          lvDataSet.Post;
+          pvCMDObject.SessionID := TCRCTools.crc32String(pvCMDObject.Config.S['user'] + DateTimeToStr(Now()));
         end;
         self.StateINfo := 'lvADOOpera,执行SQL语句完成,准备回写数据';
       except

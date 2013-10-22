@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F58CFE73-A56D-4DFE-8639-53E3F06EDB44}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TaskDispatcher\XE\TaskDispatcher.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ADEmail\XE\ADEmail.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ADPublisher\XE\ADPublisher.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TaskDispatcher">
+        <MSBuild Projects="TaskDispatcher\XE\TaskDispatcher.dproj"/>
+    </Target>
+    <Target Name="TaskDispatcher:Clean">
+        <MSBuild Projects="TaskDispatcher\XE\TaskDispatcher.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TaskDispatcher:Make">
+        <MSBuild Projects="TaskDispatcher\XE\TaskDispatcher.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ADEmail">
+        <MSBuild Projects="ADEmail\XE\ADEmail.dproj"/>
+    </Target>
+    <Target Name="ADEmail:Clean">
+        <MSBuild Projects="ADEmail\XE\ADEmail.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ADEmail:Make">
+        <MSBuild Projects="ADEmail\XE\ADEmail.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ADPublisher">
+        <MSBuild Projects="ADPublisher\XE\ADPublisher.dproj"/>
+    </Target>
+    <Target Name="ADPublisher:Clean">
+        <MSBuild Projects="ADPublisher\XE\ADPublisher.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ADPublisher:Make">
+        <MSBuild Projects="ADPublisher\XE\ADPublisher.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TaskDispatcher;ADEmail;ADPublisher"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TaskDispatcher:Clean;ADEmail:Clean;ADPublisher:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TaskDispatcher:Make;ADEmail:Make;ADPublisher:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

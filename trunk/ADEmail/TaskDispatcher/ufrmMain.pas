@@ -89,26 +89,26 @@ begin
   if FileExists(lvFileName) then
   begin
     lvFileStream := TFileStream.Create(lvFileName, fmOpenRead);
-  try
-    lvPosition := 0;
-    GetMem(lvBuffer, 1024);
     try
-      while True do
-      begin
-        lvCount := lvFileStream.Read(lvBuffer, 1024);
-        lvPosition := lvPosition + TFileHandler.writeFileData('writeabc.jpg', lvBuffer, lvPosition, lvCount);
-
-        if lvCount =0 then
+      lvPosition := 0;
+      GetMem(lvBuffer, 1024);
+      try
+        while True do
         begin
-          Break;
+          lvCount := lvFileStream.Read(lvBuffer^, 1024);
+          lvPosition := lvPosition + TFileHandler.writeFileData('writeabc.jpg', lvBuffer, lvPosition, lvCount);
+
+          if lvCount =0 then
+          begin
+            Break;
+          end;
         end;
+      finally
+        FreeMem(lvBuffer);
       end;
     finally
-      FreeMem(lvBuffer);
+      lvFileStream.Free;
     end;
-  finally
-    lvFileStream.Free;
-  end;
   end;
 
 

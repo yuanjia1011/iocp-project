@@ -21,7 +21,7 @@ type
     pnlRecvOperator: TPanel;
     rgRevcType: TRadioGroup;
     tsEmail: TTabSheet;
-    wbContent: TWebBrowser;
+    mmoContent: TMemo;
   private
     { Private declarations }
   public

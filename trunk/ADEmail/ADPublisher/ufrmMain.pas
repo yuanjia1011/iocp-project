@@ -4,13 +4,19 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  System.Actions, Vcl.ActnList;
 
 type
   TfrmMain = class(TForm)
     pgcMain: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    tsOperator: TTabSheet;
+    tsLog: TTabSheet;
+    actlstMain: TActionList;
+    actAddEmail: TAction;
+    mmoLog: TMemo;
+    btnAddEmail: TButton;
+    procedure actAddEmailExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,6 +28,19 @@ var
 
 implementation
 
+uses
+  ufrmUpdateEmail;
+
 {$R *.dfm}
+
+procedure TfrmMain.actAddEmailExecute(Sender: TObject);
+begin
+  with TfrmUpdateEmail.Create(Self) do
+  try
+    ShowModal();
+  finally
+    Free;
+  end;
+end;
 
 end.

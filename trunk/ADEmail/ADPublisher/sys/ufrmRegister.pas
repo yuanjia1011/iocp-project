@@ -84,7 +84,7 @@ begin
   end else
   begin
     dmMain.CMDObject.clear;
-    dmMain.CMDObject.CMDIndex := CMD_CHECK_USERCode;
+    dmMain.CMDObject.CMDIndex := CMD_Publicher_CheckRegister;
     dmMain.CMDObject.Config.S['user'] := trim(edtUser.Text);
     dmMain.DoAction();
     lblCodeHint.Caption := dmMain.CMDObject.Config.S['__msg'];

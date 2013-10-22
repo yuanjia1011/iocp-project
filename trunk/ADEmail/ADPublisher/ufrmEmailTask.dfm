@@ -24,8 +24,6 @@ object frmEmailTask: TfrmEmailTask
     TabOrder = 0
     object tsBase: TTabSheet
       Caption = #20219#21153#24773#20917
-      ExplicitLeft = 8
-      ExplicitTop = 25
       object Label1: TLabel
         Left = 16
         Top = 20
@@ -58,8 +56,6 @@ object frmEmailTask: TfrmEmailTask
     object TabSheet2: TTabSheet
       Caption = #36873#29992#25509#25910#20154
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 25
       object pnlRecvOperator: TPanel
         Left = 0
         Top = 0
@@ -91,9 +87,6 @@ object frmEmailTask: TfrmEmailTask
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 288
-    ExplicitTop = 232
-    ExplicitWidth = 185
   end
   object actlstMain: TActionList
     Left = 516

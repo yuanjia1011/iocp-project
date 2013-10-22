@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
-  System.Actions, Vcl.ActnList;
+  System.Actions, Vcl.ActnList, Vcl.OleCtrls, SHDocVw;
 
 type
   TfrmEmailTask = class(TForm)
@@ -20,6 +20,8 @@ type
     actlstMain: TActionList;
     pnlRecvOperator: TPanel;
     rgRevcType: TRadioGroup;
+    tsEmail: TTabSheet;
+    wbContent: TWebBrowser;
   private
     { Private declarations }
   public

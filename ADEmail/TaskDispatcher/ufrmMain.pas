@@ -138,30 +138,35 @@ begin
       //设置使用的连接池
       lvDBDataOperator.Connection := lvPoolObj.ConnObj;
 
-      lvSQL := 'SELECT * FROM sys_Users WHERE 1=0';
+      lvSQL := 'SELECT * FROM eml_emailaddr_ymofen WHERE FSex=''先生''';
 
       try
         //获取一个查询的数据
         lvDataSet := lvDBDataOperator.CDSProvider.Query(lvSQL);
-        if lvDataSet.RecordCount = 0 then
-        begin
-          lvDataSet.Append;
-          lvDataSet.FieldByName('FKey').AsString := CreateClassID;
-          lvDataSet.FieldByName('FCode').AsString := '汉字';
-          lvDataSet.FieldByName('FPassword').AsString := '汉字';
-          lvDataSet.FieldByName('FEmail').AsString := '汉字';
-          lvDataSet.FieldByName('FName').AsString := UTF8Encode('汉字');
-          lvDataSet.FieldByName('FMobile').AsString := '汉字';
-          lvDataSet.FieldByName('FRegTime').AsDateTime := Now();
-          lvDataSet.Post;
-        end else
-        begin
-          raise Exception.Create('用户名已经存在!');
-        end;
+        ShowMessage(lvDataSet.FieldByName('FEmail').AsString);
       except
         raise;
       end;
 
+      lvSQL := 'SELECT * FROM sys_Client WHERE FName=''天地弦''';
+
+      try
+        //获取一个查询的数据
+        lvDataSet := lvDBDataOperator.CDSProvider.Query(lvSQL);
+        ShowMessage(lvDataSet.FieldByName('FCode').AsString);
+      except
+        raise;
+      end;
+
+      lvSQL := 'SELECT * FROM `sys_users` WHERE FName = ''杨茂丰''';
+
+      try
+        //获取一个查询的数据
+        lvDataSet := lvDBDataOperator.CDSProvider.Query(lvSQL);
+        ShowMessage(lvDataSet.FieldByName('FCode').AsString);
+      except
+        raise;
+      end;
 
     finally
       lvDBDataOperator.Free;

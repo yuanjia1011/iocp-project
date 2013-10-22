@@ -18,16 +18,12 @@ object frmEmailTask: TfrmEmailTask
     Top = 0
     Width = 862
     Height = 385
-    ActivePage = tsEmail
+    ActivePage = tsBase
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
-    ExplicitWidth = 643
-    ExplicitHeight = 293
     object tsBase: TTabSheet
       Caption = #20219#21153#24773#20917
-      ExplicitLeft = 0
-      ExplicitTop = 25
       object Label1: TLabel
         Left = 16
         Top = 20
@@ -60,32 +56,22 @@ object frmEmailTask: TfrmEmailTask
     object tsEmail: TTabSheet
       Caption = 'Email'#20869#23481
       ImageIndex = 2
-      ExplicitWidth = 635
-      ExplicitHeight = 262
-      object wbContent: TWebBrowser
+      object mmoContent: TMemo
         Left = 0
         Top = 0
         Width = 854
         Height = 354
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 80
-        ExplicitTop = 64
-        ExplicitWidth = 300
-        ExplicitHeight = 150
-        ControlData = {
-          4C000000021F0000810F00000000000000000000000000000000000000000000
-          000000004C000000000000000000000001000000E0D057007335CF11AE690800
-          2B2E126208000000000000004C0000000114020000000000C000000000000046
-          8000000000000000000000000000000000000000000000000000000000000000
-          00000000000000000100000000000000000000000000000000000000}
+        ExplicitLeft = 176
+        ExplicitTop = 56
+        ExplicitWidth = 185
+        ExplicitHeight = 89
       end
     end
     object TabSheet2: TTabSheet
       Caption = #36873#29992#25509#25910#20154
       ImageIndex = 1
-      ExplicitWidth = 635
-      ExplicitHeight = 262
       object pnlRecvOperator: TPanel
         Left = 0
         Top = 0
@@ -94,7 +80,6 @@ object frmEmailTask: TfrmEmailTask
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 635
         object rgRevcType: TRadioGroup
           Left = 0
           Top = 0
@@ -118,8 +103,6 @@ object frmEmailTask: TfrmEmailTask
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 293
-    ExplicitWidth = 643
   end
   object actlstMain: TActionList
     Left = 460

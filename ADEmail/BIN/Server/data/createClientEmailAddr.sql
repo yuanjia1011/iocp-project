@@ -1,4 +1,4 @@
--- 客户的Email联系人列表<每个客户导入时创建一个列表eml_EmailAddr_FUserCode>
+﻿-- 客户的Email联系人列表<每个客户导入时创建一个列表eml_EmailAddr_FUserCode>
 CREATE TABLE IF NOT EXISTS eml_EmailAddr_%userCode%(
   FKey VARCHAR(38) NOT NULL,
   FClientKey VARCHAR(38) NOT NULL COMMENT '客户主键',
@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS eml_EmailAddr_%userCode%(
   FName VARCHAR(20) CHARACTER SET utf8 NOT NULL COMMENT '姓名',
   FCallName VARCHAR(50) CHARACTER SET utf8 NOT NULL COMMENT '称呼',
   FSex VARCHAR(10) CHARACTER SET utf8 NOT NULL COMMENT '性别<先生,靓仔,小姐,女士,美女>',  
-  FRemark VARCHAR(100) CHARACTER SET utf8 NOT NULL COMMENT '备注',  
+  FRemark VARCHAR(100) CHARACTER SET utf8 NULL COMMENT '备注',
   PRIMARY KEY (FKey)
 );

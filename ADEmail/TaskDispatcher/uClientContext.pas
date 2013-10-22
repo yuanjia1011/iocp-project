@@ -95,14 +95,15 @@ var
   lvStrings:TStrings;
   lvFile, lvPath:String;
 begin
-  lvPath := ExtractFieldName(ParamStr(0)) + '\data\';
+  lvPath := ExtractFilePath(ParamStr(0)) + '\data\';
   lvStrings := TStringList.Create;
   try
     lvFile := lvPath + 'createClientEmailAddr.sql';
     if FileExists(lvFile) then
     begin
       lvStrings.LoadFromFile(lvFile);
-      lvStrings.Text := StringReplace(lvStrings.Text, '%userCode%', pvUserCode, [rfReplaceAll, rfIgnoreCase]);
+      lvStrings.Text :=  StringReplace(lvStrings.Text, '%userCode%', pvUserCode, [rfReplaceAll, rfIgnoreCase]);
+      lvStrings.Text := UTF8Encode(lvStrings.Text);
       executeScript(lvStrings.Text);
     end else
     begin
@@ -141,13 +142,13 @@ begin
       DoRegister(lvCMDObject);
     end else if lvCMDObject.CMDIndex = CMD_Publisher_Login then
     begin
-      DoLogin(lvCMDObject);
+      DoLogin4Publisher(lvCMDObject);
     end else if lvCMDObject.CMDIndex = CMD_Publicher_CheckRegister then
     begin
-      DoRegisterCheck(lvCMDObject);
+      DoRegisterCheck4Publisher(lvCMDObject);
     end else if lvCMDObject.CMDIndex = CMD_Publisher_Regiser then
     begin
-      DoRegister(lvCMDObject);
+      DoRegister4Publisher(lvCMDObject);
     end else if lvCMDObject.CMDIndex = CMD_Publisher_UpdateEmail then
     begin
       checkLogin;
@@ -333,7 +334,7 @@ begin
       lvDBDataOperator.Connection := lvPoolObj.ConnObj;
 
       lvSQL := 'SELECT * FROM eml_EmailAddr_' + FuserCode
-         + ' WHERE FKey = ''' + pvCMDObject.Config.S['data.key'] + '''';
+         + ' WHERE FEmail = ''' + pvCMDObject.Config.S['data.email'] + '''';
 
       self.StateINfo := '借用了一个lvDBDataOperator,准备打开连接!';
       try
@@ -352,7 +353,12 @@ begin
           lvDataSet.FieldByName('FClientKey').AsString := FuserKey;
         end else
         begin
+          if lvDataSet.FieldByName('FKey').AsString = pvCMDObject.Config.S['data.key'] then
+          begin
+            raise Exception.Create('Email已经存在！');
+          end;
           lvDataSet.Edit;
+
         end;
 
         lvDataSet.FieldByName('FDate').AsDateTime := Now();
@@ -360,6 +366,8 @@ begin
         lvDataSet.FieldByName('FName').AsString := pvCMDObject.Config.S['data.name'];
         lvDataSet.FieldByName('FCallName').AsString := pvCMDObject.Config.S['data.callname'];
         lvDataSet.FieldByName('FSex').AsString := pvCMDObject.Config.S['data.sex'];
+        lvDataSet.FieldByName('FGrade').AsString := pvCMDObject.Config.S['data.grade'];
+        lvDataSet.FieldByName('FCatalog').AsString := pvCMDObject.Config.S['data.catalog'];
         lvDataSet.Post;
 
         self.StateINfo := 'lvDBDataOperator,更新Email数据完成';

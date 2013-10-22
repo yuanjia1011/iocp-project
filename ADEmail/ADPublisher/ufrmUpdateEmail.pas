@@ -29,15 +29,19 @@ type
     procedure actCancelExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private
+    FDataKey: String;
     { Private declarations }
   public
-    { Public declarations }
+    property DataKey: String read FDataKey write FDataKey;
   end;
 
 var
   frmUpdateEmail: TfrmUpdateEmail;
 
 implementation
+
+uses
+  udmMain, uCMDConsts;
 
 {$R *.dfm}
 
@@ -48,8 +52,23 @@ end;
 
 procedure TfrmUpdateEmail.actOKExecute(Sender: TObject);
 begin
-  ;
+  if edtEmail.Text = '' then
+  begin
+    raise Exception.Create('Emailµÿ÷∑±ÿ–Î ‰»Î!');
+  end;
 
+
+  dmMain.CMDObject.clear;
+  dmMain.CMDObject.CMDIndex := CMD_Publisher_UpdateEmail;
+  dmMain.CMDObject.Config.S['data.key'] := FDataKey;
+  dmMain.CMDObject.Config.S['data.callname'] := edtCallName.Text;
+  dmMain.CMDObject.Config.S['data.name'] := edtName.Text;
+  dmMain.CMDObject.Config.S['data.email'] := edtEmail.Text;
+  dmMain.CMDObject.Config.S['data.grade'] := cbbGrade.Text;
+  dmMain.CMDObject.Config.S['data.catalog'] := cbbCatalog.Text;
+  dmMain.CMDObject.Config.S['data.sex'] := cbbSex.Text;
+  dmMain.DoAction();
+  Close;
 end;
 
 end.

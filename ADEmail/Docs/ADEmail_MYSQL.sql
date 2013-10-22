@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS sys_Users (
 	FKey  varchar(38) NOT NULL ,
 	FCode  varchar(20) CHARACTER SET utf8 NOT NULL,
 	FName  varchar(20) CHARACTER SET utf8 NOT NULL,
-	FPassword  varchar(30) NOT NULL ,
+	FPassword  varchar(50) NOT NULL ,
 	FRegTime  datetime NOT NULL COMMENT '注册时间' ,
 	FLastLoginTime  datetime NULL COMMENT '最后登陆时间' ,
 	FMobile varchar(20) CHARACTER SET utf8 NULL COMMENT '手机',
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS sys_Client (
   FKey VARCHAR(38) NOT NULL,   
   FCode VARCHAR(20) CHARACTER SET utf8 NOT NULL,
   FName VARCHAR(20) CHARACTER SET utf8 NOT NULL,
-  FPassword VARCHAR(30) NOT NULL, 
+  FPassword VARCHAR(50) NOT NULL, 
   FRegTime  datetime NOT NULL COMMENT '注册时间' ,
   FLastLoginTime  datetime NULL COMMENT '最后登陆时间' ,
   FMobile varchar(20) CHARACTER SET utf8 NULL COMMENT '手机',
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS sys_EmailSMTP(
   FKey varchar(38) NOT NULL,  
   FSMTP_Server VARCHAR(20) NOT NULL COMMENT 'SMTP服务器',
   FSMTP_User VARCHAR(20) NOT NULL,
-  FSMTP_Password VARCHAR(20) NOT NULL,
+  FSMTP_Password VARCHAR(50) NOT NULL,
   PRIMARY KEY (FKey)  
 );
 

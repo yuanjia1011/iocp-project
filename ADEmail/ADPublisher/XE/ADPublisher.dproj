@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{FED195A8-7541-4BFE-9F6B-D620F8A5D56A}</ProjectGuid>
+        <ProjectGuid>{2F28007B-CE79-4D60-8D84-D2FC8A005653}</ProjectGuid>
         <ProjectVersion>15.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>ADPublisher.dpr</MainSource>

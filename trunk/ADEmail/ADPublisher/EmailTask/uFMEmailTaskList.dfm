@@ -12,8 +12,6 @@ object FMEmailTaskList: TFMEmailTaskList
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitWidth = 619
     object btnAddTask: TButton
       Left = 11
       Top = 10
@@ -23,7 +21,7 @@ object FMEmailTaskList: TFMEmailTaskList
       TabOrder = 0
     end
   end
-  object VirtualStringTree1: TVirtualStringTree
+  object vlsTask: TVirtualStringTree
     Left = 0
     Top = 41
     Width = 659
@@ -37,10 +35,7 @@ object FMEmailTaskList: TFMEmailTaskList
     Header.Font.Style = []
     Header.Options = [hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
     TabOrder = 1
-    ExplicitLeft = -8
-    ExplicitTop = 0
-    ExplicitWidth = 619
-    ExplicitHeight = 284
+    OnGetText = vlsTaskGetText
     Columns = <
       item
         Position = 0
@@ -54,8 +49,8 @@ object FMEmailTaskList: TFMEmailTaskList
       end>
   end
   object actlstMain: TActionList
-    Left = 8
-    Top = 192
+    Left = 40
+    Top = 200
     object actAddTask: TAction
       Caption = #28155#21152#19968#20010#20219#21153
       OnExecute = actAddTaskExecute

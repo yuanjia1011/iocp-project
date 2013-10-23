@@ -14,7 +14,7 @@ const
   CMD_Publisher_UpdateEmail = 2004;     //发布者更新添加Email信息
   CMD_Publisher_DeleteEmail = 2005;     //发布者删除Email信息
 
-  CMD_Publisher_AddTask = 2006;         //发布者添加一个任务
+  CMD_Publisher_UpdateTask = 2006;         //发布者更新一个任务
 
 implementation
 

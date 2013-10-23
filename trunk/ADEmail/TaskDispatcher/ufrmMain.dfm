@@ -18,7 +18,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 591
     Height = 311
-    ActivePage = tsDebug
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet

@@ -18,7 +18,8 @@ uses
   EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas',
   ufrmRegister in '..\sys\ufrmRegister.pas' {frmRegister},
   ufrmUpdateEmail in '..\ufrmUpdateEmail.pas' {frmUpdateEmail},
-  ufrmEmailTask in '..\ufrmEmailTask.pas' {frmEmailTask};
+  ufrmEmailTask in '..\ufrmEmailTask.pas' {frmEmailTask},
+  uFMEmailTaskList in '..\EmailTask\uFMEmailTaskList.pas' {FMEmailTaskList: TFrame};
 
 {$R *.res}
 var
@@ -31,7 +32,7 @@ begin
   //建立临时主窗体
 
   Application.CreateForm(TdmMain, dmMain);
-  if TfrmLogin.ExecuteLogin then
+  //if TfrmLogin.ExecuteLogin then
   begin
     lvTempForm.Free;
     lvTempForm := nil;

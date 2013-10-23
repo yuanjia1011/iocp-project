@@ -44,7 +44,8 @@ uses
   uUniPool in '..\..\..\UniDACPool\uUniPool.pas',
   uCMDConsts in '..\..\Common\uCMDConsts.pas',
   EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas',
-  uFileHandler in '..\FilesHandler\uFileHandler.pas';
+  uFileHandler in '..\FilesHandler\uFileHandler.pas',
+  uStringTools in '..\..\..\Common\uStringTools.pas';
 
 {$R *.res}
 

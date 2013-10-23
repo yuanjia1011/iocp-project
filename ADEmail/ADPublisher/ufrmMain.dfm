@@ -19,7 +19,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 627
     Height = 312
-    ActivePage = tsOperator
+    ActivePage = tsMyEmail
     Align = alClient
     TabOrder = 0
     object tsOperator: TTabSheet
@@ -57,17 +57,19 @@ object frmMain: TfrmMain
       Caption = #25105#30340#20219#21153
       ImageIndex = 2
     end
+    object tsMyEmail: TTabSheet
+      Caption = #25105#30340#32852#31995#20154
+      ImageIndex = 3
+    end
   end
   object actlstMain: TActionList
     Left = 192
     Top = 48
     object actAddEmail: TAction
       Caption = #28155#21152'Email'
-      OnExecute = actAddEmailExecute
     end
     object actAddTask: TAction
       Caption = #28155#21152#19968#20010#20219#21153
-      OnExecute = actAddTaskExecute
     end
   end
 end

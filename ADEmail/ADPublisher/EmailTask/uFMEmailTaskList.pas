@@ -10,11 +10,14 @@ uses
 type
   TFMEmailTaskList = class(TFrame)
     pnlTaskOperator: TPanel;
-    VirtualStringTree1: TVirtualStringTree;
+    vlsTask: TVirtualStringTree;
     actlstMain: TActionList;
     actAddTask: TAction;
     btnAddTask: TButton;
     procedure actAddTaskExecute(Sender: TObject);
+    procedure vlsTaskGetText(Sender: TBaseVirtualTree; Node:
+        PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText:
+        string);
   private
     { Private declarations }
   public
@@ -37,6 +40,13 @@ begin
   finally
     Free;
   end;
+end;
+
+procedure TFMEmailTaskList.vlsTaskGetText(Sender: TBaseVirtualTree;
+    Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var
+    CellText: string);
+begin
+  CellText := '≤‚ ‘';
 end;
 
 end.

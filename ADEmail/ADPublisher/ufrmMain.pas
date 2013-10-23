@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
-  System.Actions, Vcl.ActnList, VirtualTrees, Vcl.ExtCtrls, uFMEmailTaskList;
+  System.Actions, Vcl.ActnList, VirtualTrees, Vcl.ExtCtrls, uFMEmailTaskList,
+  uFMEmailAddrList;
 
 type
   TfrmMain = class(TForm)
@@ -19,12 +20,12 @@ type
     actAddTask: TAction;
     btnAddTask: TButton;
     tsMyTask: TTabSheet;
+    tsMyEmail: TTabSheet;
     procedure FormCreate(Sender: TObject);
-    procedure actAddEmailExecute(Sender: TObject);
-    procedure actAddTaskExecute(Sender: TObject);
   private
     { Private declarations }
     FFMTaskList:TFMEmailTaskList;
+    FFMEmailList:TFMEmailAddrList;
   public
     { Public declarations }
   end;
@@ -44,27 +45,10 @@ begin
   FFMTaskList := TFMEmailTaskList.Create(self);
   FFMTaskList.Parent := tsMyTask;
   FFMTaskList.Align := alClient;
-end;
 
-procedure TfrmMain.actAddEmailExecute(Sender: TObject);
-begin
-  with TfrmUpdateEmail.Create(Self) do
-  try
-    ShowModal();
-  finally
-    Free;
-  end;
-end;
-
-procedure TfrmMain.actAddTaskExecute(Sender: TObject);
-begin
-  with TfrmEmailTask.Create(Self) do
-  try
-    PrepareForCreate;
-    ShowModal();
-  finally
-    Free;
-  end;
+  FFMEmailList := TFMEmailAddrList.Create(self);
+  FFMEmailList.Parent := tsMyEmail;
+  FFMEmailList.Align := alClient;
 end;
 
 end.

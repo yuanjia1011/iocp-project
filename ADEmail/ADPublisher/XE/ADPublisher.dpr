@@ -19,7 +19,8 @@ uses
   ufrmRegister in '..\sys\ufrmRegister.pas' {frmRegister},
   ufrmUpdateEmail in '..\ufrmUpdateEmail.pas' {frmUpdateEmail},
   ufrmEmailTask in '..\ufrmEmailTask.pas' {frmEmailTask},
-  uFMEmailTaskList in '..\EmailTask\uFMEmailTaskList.pas' {FMEmailTaskList: TFrame};
+  uFMEmailTaskList in '..\EmailTask\uFMEmailTaskList.pas' {FMEmailTaskList: TFrame},
+  uFMEmailAddrList in '..\EmailAddr\uFMEmailAddrList.pas' {FMEmailAddrList: TFrame};
 
 {$R *.res}
 var

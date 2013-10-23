@@ -35,6 +35,8 @@ type
     //更新Email信息
     procedure DoPublisher_UpdateEmail(pvCMDObject:TCMDObject);
 
+
+
   private
     //登陆
     procedure DoLogin(const pvCMDObject:TCMDObject);
@@ -50,6 +52,9 @@ type
 
     //登陆
     procedure DoLogin4Publisher(const pvCMDObject:TCMDObject);
+
+    //更新Email信息
+    procedure DoPublisher_UpdateTask(pvCMDObject:TCMDObject);
 
     //注册
     procedure DoRegister4Publisher(const pvCMDObject:TCMDObject);
@@ -84,7 +89,8 @@ type
 implementation
 
 uses
-  Math, uCMDConsts, uUniPool, UntCobblerUniPool, uUniOperator, DB, uCRCTools;
+  Math, uCMDConsts, uUniPool, UntCobblerUniPool, uUniOperator, DB, uCRCTools,
+  uFileHandler, uStringTools;
 
 
 
@@ -153,6 +159,10 @@ begin
     begin
       checkLogin;
       DoPublisher_UpdateEmail(lvCMDObject);
+    end else if lvCMDObject.CMDIndex = CMD_Publisher_UpdateTask then
+    begin
+      checkLogin;
+      DoPublisher_UpdateTask(lvCMDObject);
     end;
 
     //直接回传
@@ -369,6 +379,78 @@ begin
         lvDataSet.FieldByName('FGrade').AsString := pvCMDObject.Config.S['data.grade'];
         lvDataSet.FieldByName('FCatalog').AsString := pvCMDObject.Config.S['data.catalog'];
         lvDataSet.Post;
+
+        self.StateINfo := 'lvDBDataOperator,更新Email数据完成';
+      except
+        raise;
+      end;
+      pvCMDObject.CMDResult := 1;
+    finally
+      lvDBDataOperator.Free;
+    end;
+  finally
+    //归还连接池
+    TUniPool.releaseConnObject(lvPoolObj);
+  end;
+end;
+
+procedure TClientContext.DoPublisher_UpdateTask(pvCMDObject:TCMDObject);
+var
+  lvDBDataOperator:TUniOperator;
+  lvPoolObj:TUniCobbler;
+  lvSQL, lvDataStr:AnsiString;
+  lvDataSet:TDataSet;
+  lvStream:TStream;
+  lvFile:String;
+begin
+  //通过帐套ID获取一个连接池对象
+  lvPoolObj := TUniPool.getConnObject('main');
+  try
+    //打开连接
+    lvPoolObj.checkConnect;
+
+    //Uni数据库操作对象<可以改用对象池效率更好>
+    lvDBDataOperator := TUniOperator.Create;
+    try
+      //设置使用的连接池
+      lvDBDataOperator.Connection := lvPoolObj.ConnObj;
+
+      lvSQL := 'SELECT * FROM eml_task'
+         + ' WHERE FKey = ''' + pvCMDObject.Config.S['data.key'] + '''';
+
+      self.StateINfo := '借用了一个lvDBDataOperator,准备打开连接!';
+      try
+        //获取一个查询的数据
+        lvDataSet := lvDBDataOperator.CDSProvider.Query(lvSQL);
+
+        if lvDataSet.RecordCount = 0 then
+        begin
+          lvDataSet.Append;
+          lvDataSet.FieldByName('FKey').AsString := pvCMDObject.Config.S['data.key'];
+          if lvDataSet.FieldByName('FKey').AsString = '' then
+          begin
+            lvDataSet.FieldByName('FKey').AsString := CreateClassID;
+            pvCMDObject.Config.S['data.key'] :=lvDataSet.FieldByName('FKey').AsString;
+          end;
+          lvDataSet.FieldByName('FClientKey').AsString := FuserKey;
+        end else
+        begin
+          lvDataSet.Edit;
+        end;
+        lvFile := TStringTools.FixValidKeyValue(pvCMDObject.Config.S['data.key']) + '.html';
+
+        lvDataSet.FieldByName('FDate').AsDateTime := Now();
+        lvDataSet.FieldByName('FContentFile').AsString :=lvFile;
+        lvDataSet.Post;
+
+
+
+
+        lvDataStr := pvCMDObject.Config.S['data.content'];
+        if Length(lvDataStr) <> 0 then
+        begin
+          TFileHandler.writeFileData(lvFile, PAnsiChar(lvDataStr),0, Length(lvDataStr));
+        end;
 
         self.StateINfo := 'lvDBDataOperator,更新Email数据完成';
       except

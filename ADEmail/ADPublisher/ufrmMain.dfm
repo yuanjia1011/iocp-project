@@ -11,6 +11,7 @@ object frmMain: TfrmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pgcMain: TPageControl
@@ -23,8 +24,6 @@ object frmMain: TfrmMain
     TabOrder = 0
     object tsOperator: TTabSheet
       Caption = #22522#26412#25805#20316
-      ExplicitLeft = 0
-      ExplicitTop = 28
       object btnAddEmail: TButton
         Left = 27
         Top = 27
@@ -32,6 +31,14 @@ object frmMain: TfrmMain
         Height = 25
         Action = actAddEmail
         TabOrder = 0
+      end
+      object btnAddTask: TButton
+        Left = 27
+        Top = 80
+        Width = 102
+        Height = 25
+        Action = actAddTask
+        TabOrder = 1
       end
     end
     object tsLog: TTabSheet
@@ -44,19 +51,23 @@ object frmMain: TfrmMain
         Height = 284
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 48
-        ExplicitTop = 40
-        ExplicitWidth = 185
-        ExplicitHeight = 89
       end
+    end
+    object tsMyTask: TTabSheet
+      Caption = #25105#30340#20219#21153
+      ImageIndex = 2
     end
   end
   object actlstMain: TActionList
-    Left = 288
-    Top = 104
+    Left = 192
+    Top = 48
     object actAddEmail: TAction
       Caption = #28155#21152'Email'
       OnExecute = actAddEmailExecute
+    end
+    object actAddTask: TAction
+      Caption = #28155#21152#19968#20010#20219#21153
+      OnExecute = actAddTaskExecute
     end
   end
 end

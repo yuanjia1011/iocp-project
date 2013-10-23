@@ -2,8 +2,8 @@ object frmEmailTask: TfrmEmailTask
   Left = 0
   Top = 0
   Caption = #26032#24314#19968#20010#20219#21153
-  ClientHeight = 426
-  ClientWidth = 862
+  ClientHeight = 467
+  ClientWidth = 744
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,14 +16,18 @@ object frmEmailTask: TfrmEmailTask
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 862
-    Height = 385
+    Width = 744
+    Height = 426
     ActivePage = tsBase
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
+    ExplicitWidth = 862
+    ExplicitHeight = 385
     object tsBase: TTabSheet
       Caption = #20219#21153#24773#20917
+      ExplicitLeft = 0
+      ExplicitTop = 25
       object Label1: TLabel
         Left = 16
         Top = 20
@@ -56,30 +60,41 @@ object frmEmailTask: TfrmEmailTask
     object tsEmail: TTabSheet
       Caption = 'Email'#20869#23481
       ImageIndex = 2
-      object mmoContent: TMemo
+      ExplicitWidth = 854
+      ExplicitHeight = 354
+      object wbContent: TWebBrowser
         Left = 0
         Top = 0
-        Width = 854
-        Height = 354
+        Width = 736
+        Height = 395
         Align = alClient
         TabOrder = 0
         ExplicitLeft = 176
-        ExplicitTop = 56
-        ExplicitWidth = 185
-        ExplicitHeight = 89
+        ExplicitTop = 48
+        ExplicitWidth = 300
+        ExplicitHeight = 150
+        ControlData = {
+          4C000000114C0000D32800000000000000000000000000000000000000000000
+          000000004C000000000000000000000001000000E0D057007335CF11AE690800
+          2B2E126208000000000000004C0000000114020000000000C000000000000046
+          8000000000000000000000000000000000000000000000000000000000000000
+          00000000000000000100000000000000000000000000000000000000}
       end
     end
     object TabSheet2: TTabSheet
       Caption = #36873#29992#25509#25910#20154
       ImageIndex = 1
+      ExplicitWidth = 854
+      ExplicitHeight = 354
       object pnlRecvOperator: TPanel
         Left = 0
         Top = 0
-        Width = 854
+        Width = 736
         Height = 57
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 854
         object rgRevcType: TRadioGroup
           Left = 0
           Top = 0
@@ -97,15 +112,60 @@ object frmEmailTask: TfrmEmailTask
   end
   object pnlOperator: TPanel
     Left = 0
-    Top = 385
-    Width = 862
+    Top = 426
+    Width = 744
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 385
+    ExplicitWidth = 862
+    DesignSize = (
+      744
+      41)
+    object btnOK: TButton
+      Left = 448
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = actOK
+      Anchors = [akTop, akRight]
+      TabOrder = 0
+      ExplicitLeft = 520
+    end
+    object btnCancel: TButton
+      Left = 636
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = actCancel
+      Anchors = [akTop, akRight]
+      TabOrder = 1
+      ExplicitLeft = 708
+    end
+    object btnSubmit: TButton
+      Left = 542
+      Top = 6
+      Width = 75
+      Height = 25
+      Action = actSubmit
+      Anchors = [akTop, akRight]
+      TabOrder = 2
+      ExplicitLeft = 614
+    end
   end
   object actlstMain: TActionList
     Left = 460
     Top = 296
+    object actOK: TAction
+      Caption = #20445#23384#33609#31295
+      OnExecute = actOKExecute
+    end
+    object actSubmit: TAction
+      Caption = #30830#35748#25552#20132
+    end
+    object actCancel: TAction
+      Caption = #21462#28040
+    end
   end
 end

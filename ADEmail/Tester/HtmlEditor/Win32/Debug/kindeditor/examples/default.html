@@ -21,7 +21,10 @@
 					allowFileManager : true
 				});
 				K('input[name=getHtml]').click(function(e) {
-					alert(editor.html());
+          htmlEditor.innerHtml = editor.html();
+					//alert(editor.html());
+          alert(htmlEditor.innerHtml);
+          alert("测试");
 				});
 				K('input[name=isEmpty]').click(function(e) {
 					alert(editor.isEmpty());
@@ -52,7 +55,7 @@
 	</head>
 	<body>
 		<h3>默认模式</h3>
-		<form>
+		<form>      
 			<textarea name="content" style="width:800px;height:400px;visibility:hidden;">KindEditor</textarea>
 			<p>
 				<input type="button" name="getHtml" value="取得HTML" />
@@ -69,5 +72,7 @@
 				<input type="reset" name="reset" value="Reset" />
 			</p>
 		</form>
+    
+    <div id="htmlEditor" name="htmlEditor"></div>
 	</body>
 </html>

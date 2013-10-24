@@ -14,7 +14,10 @@ type
     actlstMain: TActionList;
     actAddTask: TAction;
     btnAddTask: TButton;
+    btnRefresh: TButton;
+    actRefresh: TAction;
     procedure actAddTaskExecute(Sender: TObject);
+    procedure actRefreshExecute(Sender: TObject);
     procedure vlsTaskGetText(Sender: TBaseVirtualTree; Node:
         PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText:
         string);
@@ -40,6 +43,11 @@ begin
   finally
     Free;
   end;
+end;
+
+procedure TFMEmailTaskList.actRefreshExecute(Sender: TObject);
+begin
+  ;
 end;
 
 procedure TFMEmailTaskList.vlsTaskGetText(Sender: TBaseVirtualTree;

@@ -64,8 +64,12 @@ CREATE TABLE IF NOT EXISTS com_MyFiles(
 CREATE TABLE IF NOT EXISTS eml_Task(
   FKey VARCHAR(38) NOT NULL,
   FClientKey VARCHAR(38) NOT NULL COMMENT '客户主键',  
+  FSubject VARCHAR(80) COMMENT '主题',
   FDate DATETIME NOT NULL COMMENT '任务添加时间', 
   FContentFile VARCHAR(80) CHARACTER SET utf8 NOT NULL COMMENT '发送内容文件',
+  FTaskCount INT COMMENT '任务总数',
+  FSentCount INT COMMENT '已经发送数',
+  FState INT COMMENT '状态,0:草稿,1:已经提交,5:任务完成',
   PRIMARY KEY (FKey)
 );
 

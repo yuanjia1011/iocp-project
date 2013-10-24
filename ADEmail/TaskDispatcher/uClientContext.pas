@@ -53,6 +53,9 @@ type
     //登陆
     procedure DoLogin4Publisher(const pvCMDObject:TCMDObject);
 
+    //获取我的任务列表
+    procedure DoPublisher_TaskList(const pvCMDObject:TCMDObject);
+
     //更新Email信息
     procedure DoPublisher_UpdateTask(pvCMDObject:TCMDObject);
 
@@ -321,6 +324,11 @@ end;
 procedure TClientContext.DoOnWriteBack;
 begin
   inherited;
+end;
+
+procedure TClientContext.DoPublisher_TaskList(const pvCMDObject: TCMDObject);
+begin
+
 end;
 
 procedure TClientContext.DoPublisher_UpdateEmail(pvCMDObject: TCMDObject);

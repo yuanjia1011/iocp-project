@@ -53,9 +53,6 @@ type
     //登陆
     procedure DoLogin4Publisher(const pvCMDObject:TCMDObject);
 
-    //获取我的任务列表
-    procedure DoPublisher_TaskList(const pvCMDObject:TCMDObject);
-
     //更新Email信息
     procedure DoPublisher_UpdateTask(pvCMDObject:TCMDObject);
 
@@ -93,7 +90,7 @@ implementation
 
 uses
   Math, uCMDConsts, uUniPool, UntCobblerUniPool, uUniOperator, DB, uCRCTools,
-  uFileHandler, uStringTools;
+  uFileHandler, uStringTools, uEmailTaskHandler;
 
 
 
@@ -166,6 +163,10 @@ begin
     begin
       checkLogin;
       DoPublisher_UpdateTask(lvCMDObject);
+    end else if lvCMDObject.CMDIndex = CMD_Publisher_MyEmailTaskList then
+    begin
+      checkLogin;
+      TEmailTaskHandler.GetTaskList(FuserKey, lvCMDObject, Self);
     end;
 
     //直接回传
@@ -326,11 +327,6 @@ begin
   inherited;
 end;
 
-procedure TClientContext.DoPublisher_TaskList(const pvCMDObject: TCMDObject);
-begin
-
-end;
-
 procedure TClientContext.DoPublisher_UpdateEmail(pvCMDObject: TCMDObject);
 var
   lvDBDataOperator:TUniOperator;
@@ -444,11 +440,21 @@ begin
         end else
         begin
           lvDataSet.Edit;
+
+          if lvDataSet.FieldByName('FState').AsInteger <> 0 then
+          begin
+            raise Exception.Create('只有草稿的任务才能进行修改!');
+          end;
+
         end;
         lvFile := TStringTools.FixValidKeyValue(pvCMDObject.Config.S['data.key']) + '.html';
 
+        lvDataSet.FieldByName('FState').AsInteger := 0; //草稿状态
+
+        lvDataSet.FieldByName('FSubject').AsString := pvCMDObject.Config.S['data.subject'];
         lvDataSet.FieldByName('FDate').AsDateTime := Now();
         lvDataSet.FieldByName('FContentFile').AsString :=lvFile;
+
         lvDataSet.Post;
 
 

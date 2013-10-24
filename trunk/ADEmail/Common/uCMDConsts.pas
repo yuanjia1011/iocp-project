@@ -16,6 +16,8 @@ const
 
   CMD_Publisher_UpdateTask = 2006;         //发布者更新一个任务
 
+  CMD_Publisher_MyEmailTaskList = 2007;      //获取我的任务列表
+
 implementation
 
 end.

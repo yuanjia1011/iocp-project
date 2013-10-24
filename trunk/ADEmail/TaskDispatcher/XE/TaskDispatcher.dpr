@@ -45,7 +45,9 @@ uses
   uCMDConsts in '..\..\Common\uCMDConsts.pas',
   EDecryptionWrapper in '..\..\..\Common\EDecryptionWrapper.pas',
   uFileHandler in '..\FilesHandler\uFileHandler.pas',
-  uStringTools in '..\..\..\Common\uStringTools.pas';
+  uStringTools in '..\..\..\Common\uStringTools.pas',
+  uEmailTaskHandler in '..\Handler\uEmailTaskHandler.pas',
+  uUniOperatorPool in '..\..\..\UniDACPool\uUniOperatorPool.pas';
 
 {$R *.res}
 

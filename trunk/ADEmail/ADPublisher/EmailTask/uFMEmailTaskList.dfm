@@ -20,6 +20,14 @@ object FMEmailTaskList: TFMEmailTaskList
       Action = actAddTask
       TabOrder = 0
     end
+    object btnRefresh: TButton
+      Left = 128
+      Top = 10
+      Width = 81
+      Height = 25
+      Action = actRefresh
+      TabOrder = 1
+    end
   end
   object vlsTask: TVirtualStringTree
     Left = 0
@@ -54,6 +62,10 @@ object FMEmailTaskList: TFMEmailTaskList
     object actAddTask: TAction
       Caption = #28155#21152#19968#20010#20219#21153
       OnExecute = actAddTaskExecute
+    end
+    object actRefresh: TAction
+      Caption = #21047#26032
+      OnExecute = actRefreshExecute
     end
   end
 end
